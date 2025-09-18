@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="aguardienteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0F8FF;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#E6F3FF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#DDEEFF;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="canaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#228B22;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#32CD32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#90EE90;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="anisGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFACD;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0E68C;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="400" height="300" fill="#1B4332"/>
+  
+  <!-- Caña de azúcar -->
+  <rect x="50" y="100" width="15" height="150" fill="url(#canaGradient)" rx="7"/>
+  <rect x="70" y="80" width="15" height="170" fill="url(#canaGradient)" rx="7"/>
+  <rect x="90" y="90" width="15" height="160" fill="url(#canaGradient)" rx="7"/>
+  
+  <!-- Hojas de caña -->
+  <ellipse cx="45" cy="100" rx="20" ry="8" fill="#228B22" transform="rotate(-30 45 100)"/>
+  <ellipse cx="65" cy="80" rx="25" ry="10" fill="#228B22" transform="rotate(-45 65 80)"/>
+  <ellipse cx="85" cy="90" rx="22" ry="9" fill="#228B22" transform="rotate(-20 85 90)"/>
+  <ellipse cx="110" cy="95" rx="18" ry="7" fill="#228B22" transform="rotate(30 110 95)"/>
+  
+  <!-- Botella de aguardiente -->
+  <rect x="280" y="100" width="50" height="140" fill="#2F4F2F" rx="8"/>
+  <rect x="285" y="85" width="40" height="20" fill="#8B4513" rx="5"/>
+  <rect x="295" y="75" width="20" height="15" fill="#654321" rx="3"/>
+  
+  <!-- Líquido transparente -->
+  <rect x="285" y="110" width="40" height="120" fill="url(#aguardienteGradient)" rx="5"/>
+  
+  <!-- Etiqueta colombiana -->
+  <rect x="290" y="140" width="30" height="50" fill="#FFFF00" rx="3"/>
+  <rect x="292" y="142" width="26" height="15" fill="#0033A0"/>
+  <rect x="292" y="157" width="26" height="15" fill="#CE1126"/>
+  <text x="305" y="180" text-anchor="middle" font-family="serif" font-size="7" fill="#000">AGUARDIENTE</text>
+  <text x="305" y="188" text-anchor="middle" font-family="serif" font-size="5" fill="#000">COLOMBIANO</text>
+  
+  <!-- Copa tradicional -->
+  <ellipse cx="180" cy="220" rx="30" ry="10" fill="#F0F8FF" opacity="0.8"/>
+  <path d="M 150 200 Q 180 180 210 200 L 210 220 L 150 220 Z" fill="#F0F8FF" opacity="0.8"/>
+  <rect x="175" y="220" width="10" height="25" fill="#F0F8FF" opacity="0.8"/>
+  <ellipse cx="180" cy="245" rx="12" ry="4" fill="#F0F8FF" opacity="0.8"/>
+  
+  <!-- Aguardiente en la copa -->
+  <ellipse cx="180" cy="200" rx="25" ry="8" fill="url(#aguardienteGradient)"/>
+  
+  <!-- Semillas de anís -->
+  <ellipse cx="160" cy="120" rx="8" ry="12" fill="url(#anisGradient)" transform="rotate(15 160 120)"/>
+  <ellipse cx="170" cy="110" rx="6" ry="10" fill="url(#anisGradient)" transform="rotate(-10 170 110)"/>
+  <ellipse cx="150" cy="135" rx="7" ry="11" fill="url(#anisGradient)" transform="rotate(25 150 135)"/>
+  
+  <!-- Líneas decorativas en las semillas -->
+  <line x1="160" y1="115" x2="160" y2="125" stroke="#DAA520" stroke-width="1"/>
+  <line x1="170" y1="105" x2="170" y2="115" stroke="#DAA520" stroke-width="1"/>
+  <line x1="150" y1="130" x2="150" y2="140" stroke="#DAA520" stroke-width="1"/>
+  
+  <!-- Texto principal -->
+  <text x="200" y="40" text-anchor="middle" font-family="serif" font-size="22" fill="#FFFF00" font-weight="bold">TRADICIÓN</text>
+  <text x="200" y="65" text-anchor="middle" font-family="serif" font-size="18" fill="#FFFF00">COLOMBIANA</text>
+  
+  <!-- Elementos decorativos colombianos -->
+  <circle cx="60" cy="40" r="4" fill="#FFFF00" opacity="0.7"/>
+  <circle cx="340" cy="50" r="3" fill="#0033A0" opacity="0.7"/>
+  <circle cx="40" cy="60" r="3" fill="#CE1126" opacity="0.7"/>
+  <circle cx="360" cy="30" r="4" fill="#FFFF00" opacity="0.7"/>
+  
+  <!-- Vapor/aroma -->
+  <path d="M 305 75 Q 310 65 305 55 Q 300 65 305 75" fill="#F0F8FF" opacity="0.3"/>
+  <path d="M 315 70 Q 320 60 315 50 Q 310 60 315 70" fill="#F0F8FF" opacity="0.3"/>
+</svg>

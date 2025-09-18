@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <h2>SurtiLicores</h2>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="consulta-productos.html"><i class="fas fa-box"></i> Productos</a></li>
+                    <li><a href="consulta-clientes.html"><i class="fas fa-users"></i> Clientes</a></li>
+                    <li><a href="consulta-ventas.html"><i class="fas fa-chart-line"></i> Ventas</a></li>
+                </ul>
+                
+                <button class="cart-btn-nav" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                
+                <div class="user-info">
+                    <div class="admin-welcome-dropdown">
+                        <button class="user-dropdown-btn" id="userDropdownBtn">
+                            <i class="fas fa-user-shield"></i>
+                            <span class="user-name">Bienvenido, admin</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="user-dropdown-menu" id="userDropdownMenu">
+                            <a href="perfil.html" class="dropdown-item profile-btn">
+                                <i class="fas fa-user"></i>
+                                <span>Mi Perfil</span>
+                            </a>
+                            <a href="#" class="dropdown-item settings-btn">
+                                <i class="fas fa-cog"></i>
+                                <span>Configuración</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Cerrar Sesión</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <!-- Título de la zona de administración -->
+            <div class="admin-header">
+                <h1><i class="fas fa-cog"></i> Zona de Administrador</h1>
+                <div class="welcome-badge">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Bienvenido, admin</span>
+                </div>
+            </div>
+
+            <!-- Bandeja de Notificaciones -->
+            <div class="notifications-section">
+                <div class="notifications-header">
+                    <h2><i class="fas fa-bell"></i> Bandeja de Notificaciones</h2>
+                    <div class="notifications-controls">
+                        <span class="notification-count" id="notificationCount">0</span>
+                        <button class="clear-all-btn" id="clearAllBtn">
+                            <i class="fas fa-trash"></i> Limpiar Todo
+                        </button>
+                    </div>
+                </div>
+                <div class="notifications-container" id="notificationsContainer">
+                    <div class="no-notifications" id="noNotifications">
+                        <i class="fas fa-bell-slash"></i>
+                        <p>No hay notificaciones</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de estadísticas -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>0</h3>
+                        <p>Ventas Totales</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>$ 0</h3>
+                        <p>Ingresos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>13</h3>
+                        <p>Productos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>6</h3>
+                        <p>Nuevos Clientes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones Rápidas -->
+            <div class="section-title">
+                <h2>Acciones Rápidas</h2>
+            </div>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Agregar Producto</h3>
+                    <p>Añade nuevos productos al inventario</p>
+                    <button class="action-btn">Añadir</button>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Agregar Cliente</h3>
+                    <p>Registra nuevos clientes en el sistema</p>
+                    <button class="action-btn">Agregar</button>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Editar Inventario</h3>
+                    <p>Actualiza precios y existencias</p>
+                    <button class="action-btn">Editar</button>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Reportes</h3>
+                    <p>Ver reportes y descargar PDF</p>
+                    <button class="action-btn">Reportes</button>
+                </div>
+            </div>
+
+            <!-- Sección de Consultas -->
+            <div class="section-title">
+                <h2>Consultas y Configuración</h2>
+            </div>
+            <div class="queries-grid">
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h3>Consultar Productos</h3>
+                    <p>Ver y gestionar el inventario</p>
+                    <button class="query-btn" onclick="window.location.href='consulta-productos.html'">Consultar</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-address-book"></i>
+                    </div>
+                    <h3>Consulta de Clientes</h3>
+                    <p>Gestiona la base de datos de clientes</p>
+                    <button class="query-btn" onclick="window.location.href='consulta-clientes.html'">Consultar</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Consultar Ventas</h3>
+                    <p>Ver historial y estadísticas de ventas</p>
+                    <button class="query-btn" onclick="window.location.href='consulta-ventas.html'">Consultar</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3>Gestión de Inventario</h3>
+                    <p>Control completo de entradas, salidas y kardex</p>
+                    <button class="query-btn" onclick="window.location.href='inventario.html'">Gestionar</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Dashboard Analytics</h3>
+                    <p>Gráficos, tendencias y exportación de reportes</p>
+                    <button class="query-btn" onclick="window.location.href='dashboard.html'">Ver Dashboard</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Resumen Ejecutivo</h3>
+                    <p>Clientes frecuentes, alertas de stock y estado del negocio</p>
+                    <button class="query-btn" onclick="window.location.href='resumen-ejecutivo.html'">Ver Resumen</button>
+                </div>
+                <div class="query-card">
+                    <div class="query-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Configuración</h3>
+                    <p>Ajustes generales del sistema</p>
+                    <button class="query-btn">Configurar</button>
+                </div>
+            </div>
+            
+            <!-- Sección de Inventario -->
+            
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Panel de administración para la gestión completa del inventario y clientes.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Administración</h3>
+                    <ul>
+                        <li><a href="#">Gestión de Productos</a></li>
+                        <li><a href="#">Gestión de Clientes</a></li>
+                        <li><a href="#">Reportes</a></li>
+                        <li><a href="#">Configuración</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Manual de Usuario</a></li>
+                        <li><a href="#">Contacto Técnico</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SurtiLicores. Panel de Administración.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/logout.js"></script>
+<script src="../js/carrito.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

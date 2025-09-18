@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Productos - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/consulta-productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-wine-bottle"></i> SurtiLicores</h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1><i class="fas fa-table"></i> Consulta de Productos</h1>
+                <p>Gestiona y visualiza todos los productos del inventario</p>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label for="categoryFilter">Filtrar por categoría:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">Todas las categorías</option>
+                        <option value="whisky">Whiskys</option>
+                        <option value="cerveza">Cervezas</option>
+                        <option value="aguardiente">Aguardientes</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchInput">Buscar producto:</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="Buscar por nombre...">
+                </div>
+                <button id="clearFilters" class="clear-btn">
+                    <i class="fas fa-times"></i> Limpiar filtros
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Cargando productos...</span>
+            </div>
+
+            <!-- Products Table -->
+            <div class="table-section">
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Los productos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta ajustar los filtros de búsqueda</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Sistema de gestión de inventario y consulta de productos.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Administración</h3>
+                    <ul>
+                        <li><a href="admin.html">Panel de Control</a></li>
+                        <li><a href="#">Gestión de Productos</a></li>
+                        <li><a href="#">Reportes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SurtiLicores. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para visualizar producto -->
+    <div id="modalVisualizarProducto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-eye"></i> Detalles del Producto</h3>
+                <span class="close" onclick="cerrarModal('modalVisualizarProducto')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="producto-detalle">
+                    <div class="detalle-item">
+                        <label><i class="fas fa-id-badge"></i> ID:</label>
+                        <span id="detalleId"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-box"></i> Nombre:</label>
+                        <span id="detalleNombre"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-align-left"></i> Descripción:</label>
+                        <span id="detalleDescripcion"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-tags"></i> Categoría:</label>
+                        <span id="detalleCategoria" class="badge"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-dollar-sign"></i> Precio:</label>
+                        <span id="detallePrecio"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-warehouse"></i> Stock:</label>
+                        <span id="detalleStock" class="badge"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-image"></i> Imagen:</label>
+                        <img id="detalleImagen" class="producto-imagen-detalle" alt="Imagen del producto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar producto -->
+    <div id="modalEditarProducto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Editar Producto</h3>
+                <span class="close" onclick="cerrarModal('modalEditarProducto')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarProducto">
+                    <input type="hidden" id="editarId">
+                    <div class="form-group">
+                        <label for="editarNombre"><i class="fas fa-box"></i> Nombre:</label>
+                        <input type="text" id="editarNombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarDescripcion"><i class="fas fa-align-left"></i> Descripción:</label>
+                        <textarea id="editarDescripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarCategoria"><i class="fas fa-tags"></i> Categoría:</label>
+                        <select id="editarCategoria" required>
+                            <option value="whisky">Whisky</option>
+                            <option value="cerveza">Cerveza</option>
+                            <option value="aguardiente">Aguardiente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarPrecio"><i class="fas fa-dollar-sign"></i> Precio:</label>
+                        <input type="number" id="editarPrecio" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarStock"><i class="fas fa-warehouse"></i> Stock:</label>
+                        <input type="number" id="editarStock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarImagen"><i class="fas fa-image"></i> URL de Imagen:</label>
+                        <input type="url" id="editarImagen" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancelar" onclick="cerrarModal('modalEditarProducto')">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn-guardar">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div id="modalEliminarProducto" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación</h3>
+                <span class="close" onclick="cerrarModal('modalEliminarProducto')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmacion-mensaje">
+                    <div class="icono-advertencia"><i class="fas fa-box-open" style="font-size: 3rem; color: var(--danger-color);"></i></div>
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                    <p class="producto-info">
+                        <strong><i class="fas fa-box"></i> Producto:</strong> <span id="eliminarNombre"></span><br>
+                        <strong><i class="fas fa-tags"></i> Categoría:</strong> <span id="eliminarCategoria"></span>
+                    </p>
+                    <p class="advertencia">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancelar" onclick="cerrarModal('modalEliminarProducto')">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn-eliminar" id="confirmarEliminar">
+                        <i class="fas fa-trash"></i> Eliminar Producto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/consulta-productos.js"></script>
+</body>
+</html>

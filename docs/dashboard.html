@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analytics - Surtilicores</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-bar"></i> Dashboard Analytics</h1>
+                <div class="header-actions">
+                    <button class="btn-export" onclick="sincronizarDatos()">
+                        <i class="fas fa-sync-alt"></i> Sincronizar
+                    </button>
+                    <button class="btn-export" onclick="cargarDashboard()">
+                        <i class="fas fa-refresh"></i> Actualizar
+                    </button>
+                    <button class="btn-export" onclick="exportarExcel()">
+                        <i class="fas fa-file-excel"></i> Exportar 
+                    </button>
+                    <button class="btn-back" onclick="window.location.href='admin.html'">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Información de datos reales -->
+        <div class="info-banner">
+            <div class="info-content">
+                <i class="fas fa-info-circle"></i>
+                <div class="info-text">
+                    <strong>Datos en Tiempo Real</strong>
+                    <p>Este dashboard muestra los datos reales de tu negocio. Las métricas se actualizan automáticamente cuando los clientes realizan pedidos a través de la tienda online.</p>
+                </div>
+                <div class="info-actions">
+                    <small>Última actualización: <span id="ultima-actualizacion">Cargando...</span></small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas principales -->
+        <section class="metrics-grid">
+            <div class="metric-card revenue">
+                <div class="metric-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="total-ingresos">$0</h3>
+                    <p>Ingresos Totales</p>
+                    <span class="metric-trend" id="trend-ingresos"></span>
+                </div>
+            </div>
+            
+            <div class="metric-card orders">
+                <div class="metric-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="total-pedidos">0</h3>
+                    <p>Total Pedidos</p>
+                    <span class="metric-trend" id="trend-pedidos"></span>
+                </div>
+            </div>
+            
+            <div class="metric-card customers">
+                <div class="metric-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="total-clientes">0</h3>
+                    <p>Clientes Únicos</p>
+                    <span class="metric-trend" id="trend-clientes"></span>
+                </div>
+            </div>
+            
+            <div class="metric-card products">
+                <div class="metric-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="total-productos">0</h3>
+                    <p>Productos Activos</p>
+                    <span class="metric-trend" id="trend-productos"></span>
+                </div>
+            </div>
+            
+            <div class="metric-card average">
+                <div class="metric-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="venta-promedio">$0</h3>
+                    <p>Venta Promedio</p>
+                    <span class="metric-trend" id="trend-promedio"></span>
+                </div>
+            </div>
+            
+            <div class="metric-card stock-alert">
+                <div class="metric-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="metric-content">
+                    <h3 id="stock-bajo">0</h3>
+                    <p>Stock Bajo</p>
+                    <span class="metric-trend alert" id="trend-stock"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gráficos principales -->
+        <section class="charts-grid">
+            <!-- Gráfico de ventas mensuales -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><i class="fas fa-chart-line"></i> Tendencia de Ventas</h3>
+                    <div class="chart-controls">
+                        <select id="periodo-ventas">
+                            <option value="6">Últimos 6 meses</option>
+                            <option value="12">Último año</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-content">
+                    <canvas id="chart-ventas-mensuales"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico de productos más vendidos -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><i class="fas fa-trophy"></i> Productos Más Vendidos</h3>
+                    <div class="chart-controls">
+                        <select id="periodo-productos">
+                            <option value="30">Últimos 30 días</option>
+                            <option value="90">Últimos 3 meses</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-content">
+                    <canvas id="chart-productos-top"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico de ventas por categoría -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><i class="fas fa-chart-pie"></i> Ventas por Categoría</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="chart-categorias"></canvas>
+                </div>
+            </div>
+
+            <!-- Análisis de tendencias -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><i class="fas fa-trending-up"></i> Análisis de Tendencias</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="chart-tendencias"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predicciones y alertas -->
+        <section class="insights-section">
+            <div class="insights-grid">
+                <!-- Predicciones -->
+                <div class="insight-card predictions">
+                    <div class="insight-header">
+                        <h3><i class="fas fa-crystal-ball"></i> Predicciones</h3>
+                    </div>
+                    <div class="insight-content">
+                        <div class="prediction-item">
+                            <span class="prediction-label">Próximo mes:</span>
+                            <span class="prediction-value" id="prediccion-mes">$0</span>
+                        </div>
+                        <div class="prediction-item">
+                            <span class="prediction-label">Tendencia:</span>
+                            <span class="prediction-trend" id="tendencia-general">Estable</span>
+                        </div>
+                        <div class="prediction-item">
+                            <span class="prediction-label">Crecimiento:</span>
+                            <span class="prediction-growth" id="crecimiento-promedio">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos en tendencia -->
+                <div class="insight-card trending">
+                    <div class="insight-header">
+                        <h3><i class="fas fa-fire"></i> Productos en Tendencia</h3>
+                    </div>
+                    <div class="insight-content">
+                        <div id="productos-tendencia">
+                            <!-- Se carga dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alertas de inventario -->
+                <div class="insight-card alerts">
+                    <div class="insight-header">
+                        <h3><i class="fas fa-bell"></i> Alertas de Inventario</h3>
+                    </div>
+                    <div class="insight-content">
+                        <div id="alertas-inventario">
+                            <!-- Se carga dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla de resumen -->
+        <section class="summary-section">
+            <div class="section-header">
+                <h2><i class="fas fa-table"></i> Resumen Detallado</h2>
+                <div class="summary-controls">
+                    <button class="btn-refresh" onclick="cargarDashboard()">
+                        <i class="fas fa-sync-alt"></i> Actualizar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="summary-grid">
+                <!-- Últimas ventas -->
+                <div class="summary-card">
+                    <h4><i class="fas fa-clock"></i> Últimas Ventas</h4>
+                    <div class="summary-list" id="ultimas-ventas">
+                        <!-- Se carga dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Productos críticos -->
+                <div class="summary-card">
+                    <h4><i class="fas fa-exclamation-circle"></i> Stock Crítico</h4>
+                    <div class="summary-list" id="stock-critico">
+                        <!-- Se carga dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Cargando dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Modal de exportación -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-download"></i> Exportar Datos</h3>
+                <button class="close-btn" onclick="cerrarModalExport()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Selecciona el formato de exportación:</p>
+                <div class="export-options">
+                    <button class="export-option" onclick="descargarExcel()">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Excel (.xlsx)</span>
+                        <small>Datos completos en hojas separadas</small>
+                    </button>
+                    <button class="export-option" onclick="descargarPDF()">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF (.pdf)</span>
+                        <small>Reporte ejecutivo con gráficos</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

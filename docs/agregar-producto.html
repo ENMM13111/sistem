@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/consulta-clientes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-wine-bottle"></i> SurtiLicores</h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle"></i> Agregar Nuevo Producto</h1>
+                <p>Complete el formulario para agregar un nuevo producto al inventario</p>
+            </div>
+
+            <!-- Formulario de Agregar Producto -->
+            <div class="form-section">
+                <div class="form-container">
+                    <form id="formAgregarProducto" class="client-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nombreProducto"><i class="fas fa-tag"></i> Nombre del Producto:</label>
+                                <input type="text" id="nombreProducto" name="nombre" required>
+                                <span class="error-message" id="errorNombre"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="categoriaProducto"><i class="fas fa-list"></i> Categoría:</label>
+                                <select id="categoriaProducto" name="categoria" required>
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="whisky">Whisky</option>
+                                    <option value="cerveza">Cerveza</option>
+                                    <option value="aguardiente">Aguardiente</option>
+                                </select>
+                                <span class="error-message" id="errorCategoria"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descripcionProducto"><i class="fas fa-align-left"></i> Descripción:</label>
+                                <textarea id="descripcionProducto" name="descripcion" rows="3" placeholder="Descripción del producto" required></textarea>
+                                <span class="error-message" id="errorDescripcion"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="precioProducto"><i class="fas fa-dollar-sign"></i> Precio (COP):</label>
+                                <input type="number" id="precioProducto" name="precio" min="0" step="0.01" required>
+                                <span class="error-message" id="errorPrecio"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="imagenProducto"><i class="fas fa-image"></i> URL de Imagen:</label>
+                                <input type="url" id="imagenProducto" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                                <span class="error-message" id="errorImagen"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stockProducto"><i class="fas fa-boxes"></i> Stock Inicial:</label>
+                                <input type="number" id="stockProducto" name="stock" min="0" required>
+                                <span class="error-message" id="errorStock"></span>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='admin.html'">
+                                <i class="fas fa-arrow-left"></i> Volver al Panel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Producto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </main>
+
+    <script src="../js/agregar-producto.js"></script>
+</body>
+</html>

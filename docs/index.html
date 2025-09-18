@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SurtiLicores - La mejor tienda de licores con amplia selección de whiskys, aguardientes y cervezas nacionales e importados. Calidad garantizada y mejores precios.">
+    <meta name="keywords" content="licores, whisky, aguardiente, cerveza, tienda online, licores premium, bebidas alcohólicas">
+    <meta name="author" content="SurtiLicores">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SurtiLicores - Tu tienda de licores preferida">
+    <meta property="og:description" content="La mejor selección de licores nacionales e importados para todas tus celebraciones.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="SurtiLicores - Tu tienda de licores preferida">
+    <meta property="twitter:description" content="La mejor selección de licores nacionales e importados para todas tus celebraciones.">
+    
+    <title>SurtiLicores - Tu tienda de licores preferida</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../css/index.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="../js/session-manager.js" as="script">
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="all">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/carrito.css">
+    
+    <!-- Critical JavaScript -->
+    <script src="../js/session-manager.js" defer></script>
+</head>
+<body>
+        <header role="banner">
+        <div class="container header-content">
+            <a href="index.html" class="logo" aria-label="SurtiLicores - Página de inicio">Surti<span>Licores</span></a>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-nav">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <nav id="mobile-nav" role="navigation" aria-label="Navegación principal">
+                <ul role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem" aria-current="page">Inicio</a></li>
+                    <li class="dropdown" role="none">
+                        <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">Productos</a>
+                        <div class="dropdown-content" role="menu" aria-label="Menú de productos">
+                            <a href="whiskys.html" role="menuitem"><i class="fas fa-glass-whiskey" aria-hidden="true"></i> Whiskys</a>
+                            <a href="aguardientes.html" role="menuitem"><i class="fas fa-wine-bottle" aria-hidden="true"></i> Aguardientes</a>
+                            <a href="cervezas.html" role="menuitem"><i class="fas fa-beer" aria-hidden="true"></i> Cervezas</a>
+                        </div>
+                    </li>
+                    <li role="none"><a href="nosotros.html" role="menuitem">Nosotros</a></li>
+                    <li role="none"><a href="contacto.html" role="menuitem">Contacto</a></li>
+                    <li role="none"><a href="#" class="cart-btn-nav" id="cart-btn" role="menuitem" aria-label="Ver carrito de compras"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Carrito <span class="cart-count" id="cart-count" aria-label="Productos en carrito">0</span></a></li>
+                    <li role="none"><a href="login.html" class="login-btn-nav" role="menuitem"><i class="fas fa-user" aria-hidden="true"></i> Iniciar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="hero" role="banner" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h1 id="hero-title">Bienvenido a SurtiLicores</h1>
+                <p>La mejor selección de licores nacionales e importados para todas tus celebraciones. Calidad, variedad y los mejores precios garantizados.</p>
+                <a href="#productos" class="btn" aria-describedby="hero-title">Ver Productos</a>
+            </div>
+        </section>
+
+        <!-- Sección de productos destacados -->
+        <section class="featured" id="productos" aria-labelledby="productos-title">
+            <div class="container">
+                <header class="section-title">
+                    <h2 id="productos-title">Productos Destacados</h2>
+                    <p>Descubre nuestra selección premium de licores</p>
+                </header>
+                <div class="products" id="featured-products" role="region" aria-label="Lista de productos destacados">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de categorías -->
+        <section class="categories" id="categorias" aria-labelledby="categorias-title">
+            <div class="container">
+                <header class="section-title">
+                    <h2 id="categorias-title">Nuestras Categorías</h2>
+                    <p>Explora nuestra amplia variedad de licores</p>
+                </header>
+                <div class="category-cards" role="navigation" aria-label="Navegación por categorías de productos">
+                    <a href="whiskys.html" class="category-card" aria-label="Ver productos de Whiskys">
+                        <div class="category-icon" aria-hidden="true">
+                            <i class="fas fa-glass-whiskey"></i>
+                        </div>
+                        <div class="category-name">
+                            <h3>Whiskys</h3>
+                        </div>
+                    </a>
+                    <a href="aguardientes.html" class="category-card" aria-label="Ver productos de Aguardientes">
+                        <div class="category-icon" aria-hidden="true">
+                            <i class="fas fa-wine-bottle"></i>
+                        </div>
+                        <div class="category-name">
+                            <h3>Aguardientes</h3>
+                        </div>
+                    </a>
+                    <a href="cervezas.html" class="category-card" aria-label="Ver productos de Cervezas">
+                        <div class="category-icon" aria-hidden="true">
+                            <i class="fas fa-beer"></i>
+                        </div>
+                        <div class="category-name">
+                            <h3>Cervezas</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección sobre nosotros -->
+        <section class="about" id="nosotros" aria-labelledby="nosotros-title">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 id="nosotros-title">Sobre SurtiLicores</h2>
+                        <p>Con más de 10 años de experiencia en el mercado, SurtiLicores se ha consolidado como la tienda de licores de confianza para miles de clientes.</p>
+                        <p>Ofrecemos una amplia selección de licores nacionales e importados, garantizando siempre la mejor calidad y los precios más competitivos del mercado.</p>
+                        <p>Nuestro compromiso es brindar un servicio excepcional y productos de la más alta calidad para hacer de tus celebraciones momentos inolvidables.</p>
+                        <a href="nosotros.html" class="btn" aria-label="Conoce más sobre SurtiLicores">Conoce más</a>
+                    </div>
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tienda SurtiLicores con amplia selección de licores premium" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Tu tienda de licores de confianza con la mejor selección de productos nacionales e importados.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <nav aria-label="Enlaces rápidos del footer">
+                        <ul>
+                            <li><a href="index.html" aria-label="Ir a página de inicio">Inicio</a></li>
+                            <li><a href="whiskys.html" aria-label="Ver productos de Whiskys">Whiskys</a></li>
+                            <li><a href="aguardientes.html" aria-label="Ver productos de Aguardientes">Aguardientes</a></li>
+                            <li><a href="cervezas.html" aria-label="Ver productos de Cervezas">Cervezas</a></li>
+                            <li><a href="nosotros.html" aria-label="Conoce más sobre nosotros">Nosotros</a></li>
+                            <li><a href="contacto.html" aria-label="Información de contacto">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer-column">
+                    <h3>Categorías</h3>
+                    <nav aria-label="Navegación por categorías">
+                        <ul>
+                            <li><a href="index.html" aria-label="Ir a página de inicio">Inicio</a></li>
+                            <li><a href="#productos" aria-label="Ver productos destacados">Productos</a></li>
+                            <li><a href="#categorias" aria-label="Explorar categorías">Categorías</a></li>
+                            <li><a href="contacto.html" aria-label="Información de contacto">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer-column">
+                    <h3>Boletín</h3>
+                    <p>Suscríbete para recibir nuestras ofertas y novedades.</p>
+                    <form class="newsletter-form" action="#" method="POST" aria-label="Formulario de suscripción al boletín">
+                        <div class="form-group">
+                            <label for="newsletter-email" class="sr-only">Correo electrónico para suscripción</label>
+                            <input type="email" id="newsletter-email" placeholder="Tu correo electrónico" required aria-describedby="newsletter-help">
+                            <button type="submit" class="btn-newsletter" aria-describedby="newsletter-help">Suscribirse</button>
+                            <div id="newsletter-help" class="sr-only">Ingresa tu correo electrónico para recibir ofertas y novedades</div>
+                        </div>
+                    </form>
+                    <div class="social-links" role="navigation" aria-label="Enlaces a redes sociales">
+                        <a href="#" class="social-link" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Síguenos en Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Síguenos en Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SurtiLicores. Todos los derechos reservados. | Diseñado con ❤️</p>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript optimizado para carga asíncrona -->
+    <script src="../js/api.js" defer></script>
+    <script src="../js/carrito.js" defer></script>
+    <script src="../js/mobile-menu.js" defer></script>
+    
+    <!-- Service Worker para cache offline (opcional) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+<script>
+// Función para verificar estado de autenticación
+function checkAuthStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userData = localStorage.getItem('user');
+    
+    if (isLoggedIn === 'true' && userData) {
+        const user = JSON.parse(userData);
+        updateNavForLoggedUser(user);
+    }
+}
+
+// Función para actualizar la navegación cuando el usuario está logueado
+function updateNavForLoggedUser(user) {
+    const loginBtn = document.querySelector('.login-btn-nav');
+    
+    if (loginBtn) {
+        // Limpiar cualquier dropdown existente
+        const existingDropdown = loginBtn.parentElement.querySelector('.user-dropdown');
+        if (existingDropdown) {
+            existingDropdown.remove();
+        }
+        
+        // Reemplazar el botón de login con el nombre del usuario (sin flecha adicional)
+        loginBtn.innerHTML = `<i class="fas fa-user"></i> ${user.username}`;
+        loginBtn.href = '#';
+        loginBtn.classList.add('user-menu-toggle');
+        
+        // Crear menú desplegable para el usuario
+        const userDropdown = document.createElement('div');
+        userDropdown.className = 'dropdown-content user-dropdown';
+        userDropdown.style.display = 'none';
+        userDropdown.innerHTML = `
+            <a href="perfil-cliente.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+            <a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        `;
+        
+        // Convertir el elemento li en dropdown
+        const loginLi = loginBtn.parentElement;
+        loginLi.classList.add('dropdown', 'user-dropdown-container');
+        loginLi.appendChild(userDropdown);
+        
+        // Agregar eventos para mostrar/ocultar dropdown
+        let dropdownTimeout;
+        
+        // Remover eventos anteriores para evitar duplicación
+        loginLi.replaceWith(loginLi.cloneNode(true));
+        const newLoginLi = document.querySelector('.user-dropdown-container');
+        const newLoginBtn = newLoginLi.querySelector('.login-btn-nav');
+        const newUserDropdown = newLoginLi.querySelector('.user-dropdown');
+        
+        newLoginLi.addEventListener('mouseenter', function() {
+            clearTimeout(dropdownTimeout);
+            newUserDropdown.style.display = 'block';
+        });
+        
+        newLoginLi.addEventListener('mouseleave', function() {
+            dropdownTimeout = setTimeout(() => {
+                newUserDropdown.style.display = 'none';
+            }, 200);
+        });
+        
+        // También agregar evento de click para dispositivos móviles
+        newLoginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isVisible = newUserDropdown.style.display === 'block';
+            newUserDropdown.style.display = isVisible ? 'none' : 'block';
+        });
+    }
+}
+
+// Función para cerrar sesión
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user');
+    window.location.reload();
+}
+
+// Script para funcionalidades futuras
+document.addEventListener('DOMContentLoaded', function() {
+    // El gestor de sesión se encarga de la autenticación
+    console.log('Index.html cargado - Sesión manejada por SessionManager');
+});
+
+// Añadir estilos CSS para el dropdown del usuario
+const style = document.createElement('style');
+style.textContent = `
+    .user-dropdown-container {
+        position: relative;
+    }
+    
+    .user-dropdown {
+        position: absolute;
+        right: 0;
+        left: auto;
+        min-width: 220px;
+        top: 100%;
+        margin-top: 5px;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        background: white;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        z-index: 1001;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+    
+    .user-dropdown[style*="block"] {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .user-dropdown a {
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid #f5f5f5;
+        font-weight: 500;
+    }
+    
+    .user-dropdown a:last-child {
+        border-bottom: none;
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .user-dropdown a:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .user-dropdown a:hover {
+        background-color: var(--accent-color);
+        color: #333;
+        transform: translateX(3px);
+    }
+    
+    .user-dropdown a i {
+        width: 18px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+    
+    .user-menu-toggle {
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .user-menu-toggle .fa-chevron-down {
+        font-size: 0.75em;
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+    
+    .user-dropdown-container:hover .fa-chevron-down {
+        transform: rotate(180deg);
+    }
+    
+    /* Asegurar que el dropdown sea visible por encima de otros elementos */
+    .user-dropdown-container {
+        z-index: 1000;
+    }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>

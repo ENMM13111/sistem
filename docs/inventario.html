@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - Surtilicores</title>
+    <link rel="stylesheet" href="../css/inventario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="inventory-header">
+            <div class="header-content">
+                <h1><i class="fas fa-boxes"></i> Gestión de Inventario</h1>
+                <div class="header-actions">
+                    <button class="btn-back" onclick="window.location.href='admin.html'">
+                        <i class="fas fa-arrow-left"></i> Volver al Admin
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegación de pestañas -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="productos">
+                <i class="fas fa-box"></i> Productos
+            </button>
+            <button class="tab-btn" data-tab="entradas">
+                <i class="fas fa-plus-circle"></i> Entradas
+            </button>
+            <button class="tab-btn" data-tab="salidas">
+                <i class="fas fa-minus-circle"></i> Salidas
+            </button>
+            <button class="tab-btn" data-tab="kardex">
+                <i class="fas fa-chart-line"></i> Kardex
+            </button>
+        </nav>
+
+        <!-- Contenido de pestañas -->
+        <main class="tabs-content">
+            <!-- Pestaña Productos -->
+            <div class="tab-content active" id="productos">
+                <div class="section-header">
+                    <h2>Productos en Inventario</h2>
+                    <button class="btn-primary" onclick="abrirModalProducto()">
+                        <i class="fas fa-plus"></i> Nuevo Producto
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Buscar:</label>
+                        <input type="text" id="buscar-producto" placeholder="Nombre o código...">
+                    </div>
+                    <div class="filter-group">
+                        <label>Categoría:</label>
+                        <select id="filtro-categoria">
+                            <option value="">Todas</option>
+                            <option value="cerveza">Cerveza</option>
+                            <option value="whisky">Whisky</option>
+                            <option value="aguardiente">Aguardiente</option>
+                            <option value="vino">Vino</option>
+                            <option value="ron">Ron</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Stock:</label>
+                        <select id="filtro-stock">
+                            <option value="">Todos</option>
+                            <option value="bajo">Stock Bajo</option>
+                            <option value="normal">Stock Normal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Tabla de productos -->
+                <div class="table-container">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Presentación</th>
+                                <th>P. Compra</th>
+                                <th>P. Venta</th>
+                                <th>Stock</th>
+                                <th>Mín.</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productos-tbody">
+                            <!-- Productos se cargan aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pestaña Entradas -->
+            <div class="tab-content" id="entradas">
+                <div class="section-header">
+                    <h2>Registrar Entrada de Mercancía</h2>
+                </div>
+
+                <div class="form-container">
+                    <form id="form-entrada" class="inventory-form" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="entrada-producto">Producto *</label>
+                                <select id="entrada-producto" required>
+                                    <option value="">Seleccionar producto...</option>
+                                </select>
+                                <small class="product-id-display" id="entrada-product-id" style="display: none;">
+                                    ID del Producto: <strong></strong>
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="entrada-cantidad">Cantidad *</label>
+                                <input type="number" id="entrada-cantidad" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="entrada-precio">Precio Unitario *</label>
+                                <input type="number" id="entrada-precio" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="entrada-proveedor">Proveedor</label>
+                                <input type="text" id="entrada-proveedor">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="entrada-factura">Número de Factura</label>
+                                <input type="text" id="entrada-factura">
+                            </div>
+                            <div class="form-group">
+                                <label for="entrada-archivo-factura">Adjuntar Factura</label>
+                                <input type="file" id="entrada-archivo-factura" accept=".pdf,.jpg,.jpeg,.png" class="file-input">
+                                <small class="file-help">Formatos: PDF, JPG, PNG (Máx. 5MB)</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="entrada-observaciones">Observaciones</label>
+                                <textarea id="entrada-observaciones" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-success">
+                                <i class="fas fa-save"></i> Registrar Entrada
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Pestaña Salidas -->
+            <div class="tab-content" id="salidas">
+                <div class="section-header">
+                    <h2>Registrar Salida de Mercancía</h2>
+                </div>
+
+                <div class="form-container">
+                    <form id="form-salida" class="inventory-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salida-producto">Producto *</label>
+                                <select id="salida-producto" required>
+                                    <option value="">Seleccionar producto...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="salida-cantidad">Cantidad *</label>
+                                <input type="number" id="salida-cantidad" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salida-tipo">Tipo de Salida *</label>
+                                <select id="salida-tipo" required>
+                                    <option value="">Seleccionar tipo...</option>
+                                    <option value="venta">Venta</option>
+                                    <option value="devolucion">Devolución a Proveedor</option>
+                                    <option value="merma">Merma/Pérdida</option>
+                                    <option value="ajuste">Ajuste de Inventario</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="salida-cliente">Cliente/Destino</label>
+                                <input type="text" id="salida-cliente">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salida-documento">Documento</label>
+                                <input type="text" id="salida-documento">
+                            </div>
+                            <div class="form-group">
+                                <label for="salida-observaciones">Observaciones</label>
+                                <textarea id="salida-observaciones" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-warning">
+                                <i class="fas fa-save"></i> Registrar Salida
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Pestaña Kardex -->
+            <div class="tab-content" id="kardex">
+                <div class="section-header">
+                    <h2>Kardex de Productos</h2>
+                </div>
+
+                <div class="kardex-controls">
+                    <div class="form-group">
+                        <label for="kardex-producto">Seleccionar Producto:</label>
+                        <select id="kardex-producto">
+                            <option value="">Seleccionar producto...</option>
+                        </select>
+                    </div>
+                    <button class="btn-info" onclick="cargarKardex()">
+                        <i class="fas fa-search"></i> Ver Kardex
+                    </button>
+                </div>
+
+                <div id="kardex-container" class="table-container" style="display: none;">
+                    <h3 id="kardex-titulo"></h3>
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Tercero</th>
+                                <th>Documento</th>
+                                <th>Saldo</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kardex-tbody">
+                            <!-- Movimientos se cargan aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Nuevo Producto -->
+    <div id="modal-producto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-box"></i> Nuevo Producto</h3>
+                <button class="close-btn" onclick="cerrarModalProducto()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-producto">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-codigo">Código *</label>
+                            <input type="text" id="producto-codigo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-nombre">Nombre *</label>
+                            <input type="text" id="producto-nombre" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-categoria">Categoría *</label>
+                            <select id="producto-categoria" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="cerveza">Cerveza</option>
+                                <option value="whisky">Whisky</option>
+                                <option value="aguardiente">Aguardiente</option>
+                                <option value="vino">Vino</option>
+                                <option value="ron">Ron</option>
+                                <option value="vodka">Vodka</option>
+                                <option value="tequila">Tequila</option>
+                                <option value="licor">Licor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-presentacion">Presentación *</label>
+                            <input type="text" id="producto-presentacion" placeholder="Ej: Botella 750ml" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-precio-compra">Precio Compra *</label>
+                            <input type="number" id="producto-precio-compra" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-precio-venta">Precio Venta *</label>
+                            <input type="number" id="producto-precio-venta" step="0.01" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-stock-minimo">Stock Mínimo *</label>
+                            <input type="number" id="producto-stock-minimo" min="0" value="5" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="cerrarModalProducto()">
+                    Cancelar
+                </button>
+                <button type="submit" form="form-producto" class="btn-primary">
+                    <i class="fas fa-save"></i> Guardar Producto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+
+    <script src="../js/inventario.js"></script>
+</body>
+</html>

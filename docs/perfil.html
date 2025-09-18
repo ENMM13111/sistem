@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <h2><i class="fas fa-wine-bottle"></i> SurtiLicores</h2>
+                </div>
+                <div class="nav-menu">
+                    <a href="admin.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="profile-main">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-circle" id="avatarPreview">
+                        <img id="avatarImage" src="" alt="Avatar" style="display: none;">
+                        <i class="fas fa-user" id="avatarIcon"></i>
+                    </div>
+                    <div class="avatar-options">
+                        <button class="change-avatar-btn" id="changeAvatarBtn">
+                            <i class="fas fa-camera"></i>
+                            Cambiar Foto
+                        </button>
+                        <div class="avatar-menu" id="avatarMenu">
+                            <button class="avatar-option" id="uploadFromFiles">
+                                <i class="fas fa-folder-open"></i>
+                                Subir desde Archivos
+                            </button>
+                            <button class="avatar-option" id="takePhoto">
+                                <i class="fas fa-camera"></i>
+                                Tomar Foto
+                            </button>
+                            <button class="avatar-option" id="removeAvatar">
+                                <i class="fas fa-trash"></i>
+                                Eliminar Foto
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Hidden file input for uploading from files -->
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <!-- Hidden video element for camera capture -->
+                    <video id="cameraVideo" style="display: none;" autoplay playsinline></video>
+                    <!-- Hidden canvas for capturing photo -->
+                    <canvas id="photoCanvas" style="display: none;"></canvas>
+                </div>
+                <div class="profile-info">
+                    <h1>Administrador</h1>
+                    <p class="profile-role">Administrador del Sistema</p>
+                    <p class="profile-last-login">
+                        <i class="fas fa-clock"></i>
+                        Último acceso: <span id="lastLogin">Hoy a las 14:30</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Profile Sections -->
+            <div class="profile-content">
+                <!-- Personal Information -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-edit"></i> Información Personal</h2>
+                    </div>
+                    <form class="profile-form" id="personalInfoForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">Nombre</label>
+                                <input type="text" id="firstName" name="firstName" value="Admin" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Apellido</label>
+                                <input type="text" id="lastName" name="lastName" value="Sistema" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" value="admin@surtilicores.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone" value="+57 300 123 4567">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cog"></i> Configuración de Cuenta</h2>
+                    </div>
+                    <form class="profile-form" id="accountForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="username">Nombre de Usuario</label>
+                                <input type="text" id="username" name="username" value="admin" required>
+                                <small class="form-help">El nombre de usuario debe ser único</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Rol del Usuario</label>
+                                <select id="role" name="role" disabled>
+                                    <option value="admin" selected>Administrador</option>
+                                    <option value="manager">Gerente</option>
+                                    <option value="employee">Empleado</option>
+                                </select>
+                                <small class="form-help">Solo un super administrador puede cambiar roles</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Actualizar Cuenta
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Password Change -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lock"></i> Cambiar Contraseña</h2>
+                    </div>
+                    <form class="profile-form" id="passwordForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="currentPassword">Contraseña Actual</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword" name="currentPassword" required>
+                                    <button type="button" class="toggle-password" data-target="currentPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">Nueva Contraseña</label>
+                                <div class="password-input">
+                                    <input type="password" id="newPassword" name="newPassword" required>
+                                    <button type="button" class="toggle-password" data-target="newPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="passwordStrength">
+                                    <div class="strength-bar">
+                                        <div class="strength-fill"></div>
+                                    </div>
+                                    <span class="strength-text">Ingresa una contraseña</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                    <button type="button" class="toggle-password" data-target="confirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="password-requirements">
+                            <h4>Requisitos de la contraseña:</h4>
+                            <ul>
+                                <li id="req-length"><i class="fas fa-times"></i> Al menos 8 caracteres</li>
+                                <li id="req-uppercase"><i class="fas fa-times"></i> Una letra mayúscula</li>
+                                <li id="req-lowercase"><i class="fas fa-times"></i> Una letra minúscula</li>
+                                <li id="req-number"><i class="fas fa-times"></i> Un número</li>
+                                <li id="req-special"><i class="fas fa-times"></i> Un carácter especial</li>
+                            </ul>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-key"></i> Cambiar Contraseña
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-shield-alt"></i> Configuración de Seguridad</h2>
+                    </div>
+                    <div class="security-options">
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h3>Autenticación de Dos Factores</h3>
+                                <p>Agrega una capa extra de seguridad a tu cuenta</p>
+                            </div>
+                            <div class="security-toggle">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="twoFactor">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h3>Notificaciones de Inicio de Sesión</h3>
+                                <p>Recibe alertas cuando alguien acceda a tu cuenta</p>
+                            </div>
+                            <div class="security-toggle">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="loginNotifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h3>Sesiones Activas</h3>
+                                <p>Administra los dispositivos conectados a tu cuenta</p>
+                            </div>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-desktop"></i> Ver Sesiones
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-history"></i> Actividad Reciente</h2>
+                    </div>
+                    <div class="activity-log">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Inicio de sesión exitoso</h4>
+                                <p>Hoy a las 14:30 desde 192.168.1.100</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Producto actualizado</h4>
+                                <p>Ayer a las 16:45 - Whisky Johnnie Walker</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Intento de acceso fallido</h4>
+                                <p>Hace 2 días a las 09:15 desde IP desconocida</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><!-- Success/Error Messages -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Camera Modal (will be created dynamically) -->
+    <!-- Modal is created by JavaScript when needed -->
+
+    <!-- Scripts -->
+    <script src="../js/perfil.js"></script>
+</body>
+</html>

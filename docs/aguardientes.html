@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aguardientes - Surtilicores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/productos/aguardientes.css?v=2024">
+    <link rel="stylesheet" href="../css/carrito.css">
+    <script src="../js/session-manager.js"></script>
+</head>
+<body>
+           <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Surti<span>Licores</span></a>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#">Productos</a>
+                        <div class="dropdown-content">
+                            <a href="whiskys.html">Whiskys</a>
+                            <a href="aguardientes.html">Aguardientes</a>
+                            <a href="cervezas.html">Cervezas</a>
+                        </div>
+                    </li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="#" class="cart-btn-nav" id="cart-btn"><i class="fas fa-shopping-cart"></i> Carrito <span class="cart-count" id="cart-count">0</span></a></li>
+                    <li><a href="login.html" class="login-btn-nav"><i class="fas fa-user"></i> Iniciar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Aguardientes Colombianos</h1>
+            <p>Descubre nuestra selección de aguardientes nacionales, la bebida tradicional colombiana con su característico sabor a anís.</p>
+            <a href="#productos" class="btn">Ver Colección</a>
+        </div>
+    </section>
+
+    <section class="featured" id="productos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Selección de Aguardientes</h2>
+            </div>
+            <div class="products" id="productos-container">
+                <!-- Las tarjetas de productos se cargarán dinámicamente desde la API -->
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <div class="info-content">
+                <div class="info-img">
+                    <img src="../css/images/aguardiente-art.svg" alt="El Arte del Aguardiente">
+                </div>
+                <div class="info-text">
+                    <h2>El Aguardiente: Tradición Colombiana</h2>
+                    <p>El aguardiente es una bebida alcohólica tradicional de Colombia, elaborada a partir de la destilación de la caña de azúcar y aromatizada con anís. Su nombre proviene de la expresión "agua ardiente", que hace referencia a su alto contenido alcohólico.</p>
+                    <p>Cada región de Colombia tiene su propia marca de aguardiente, con características particulares que reflejan las tradiciones locales:</p>
+                    <ul style="list-style-position: inside; margin-bottom: 1rem;">
+                        <li><strong>Antioqueño:</strong> Producido en Antioquia, es uno de los más populares del país.</li>
+                        <li><strong>Néctar:</strong> Originario de Cundinamarca, con un sabor equilibrado.</li>
+                        <li><strong>Blanco del Valle:</strong> Producido en el Valle del Cauca, con un sabor distintivo.</li>
+                        <li><strong>Cristal:</strong> De Caldas, conocido por su suavidad.</li>
+                    </ul>
+                    <p>El aguardiente es parte fundamental de la cultura colombiana, presente en celebraciones, fiestas y reuniones sociales. En SurtiLicores ofrecemos una amplia variedad de aguardientes de todas las regiones del país.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Tu tienda de licores de confianza con la mejor selección de productos nacionales e importados.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="whiskys.html">Whiskys</a></li>
+                        <li><a href="aguardientes.html">Aguardientes</a></li>
+                        <li><a href="cervezas.html">Cervezas</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Principal #123, Ciudad</li>
+                        <li><i class="fas fa-phone"></i> +57 300 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@surtilicores.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Síguenos</h3>
+                    <div class="social-links" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: var(--light-color); font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: var(--light-color); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--light-color); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--light-color); font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SurtiLicores. Todos los derechos reservados. | Diseñado con ❤️</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/api.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+</body>
+</html>

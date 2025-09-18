@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Clientes - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/consulta-clientes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-wine-bottle"></i> SurtiLicores</h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1><i class="fas fa-users"></i> Consulta de Clientes</h1>
+                <p>Gestiona y visualiza todos los clientes registrados en el sistema</p>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="roleFilter"><i class="fas fa-user-tag"></i> Filtrar por rol:</label>
+                        <select id="roleFilter" class="filter-select">
+                            <option value="">Todos los roles</option>
+                            <option value="admin">Administradores</option>
+                            <option value="empleado">Empleados</option>
+                            <option value="cliente">Clientes</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter"><i class="fas fa-toggle-on"></i> Filtrar por estado:</label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">Todos los estados</option>
+                            <option value="activo">Activos</option>
+                            <option value="inactivo">Inactivos</option>
+                            <option value="suspendido">Suspendidos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="searchInput"><i class="fas fa-search"></i> Buscar cliente:</label>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, usuario, email, teléfono o dirección...">
+                    </div>
+                    <div class="filter-group">
+                        <button id="clearFilters" class="clear-filters-btn">
+                            <i class="fas fa-times"></i> Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Cargando clientes...</span>
+            </div>
+
+            <!-- Clients Table -->
+            <div class="table-section">
+                <div class="table-container">
+                    <table class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Dirección</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Fecha Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <!-- Los clientes se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-user-slash"></i>
+                <h3>No se encontraron clientes</h3>
+                <p>Intenta ajustar los filtros de búsqueda</p>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalClients">0</h3>
+                            <p>Total Clientes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="activeClients">0</h3>
+                            <p>Clientes Activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-times"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="inactiveClients">0</h3>
+                            <p>Clientes Inactivos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="adminUsers">0</h3>
+                            <p>Administradores</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="newClients">0</h3>
+                            <p>Nuevos este mes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Sistema de gestión de clientes y administración de usuarios.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Administración</h3>
+                    <ul>
+                        <li><a href="admin.html">Panel de Control</a></li>
+                        <li><a href="consulta-productos.html">Gestión de Productos</a></li>
+                        <li><a href="#">Reportes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SurtiLicores. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para visualizar cliente -->
+    <div id="modalVisualizarCliente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-eye"></i> Detalles del Cliente</h3>
+                <span class="close" onclick="cerrarModal('modalVisualizarCliente')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="cliente-detalle">
+                    <div class="detalle-item">
+                        <label><i class="fas fa-id-badge"></i> ID:</label>
+                        <span id="detalleId"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-user"></i> Usuario:</label>
+                        <span id="detalleUsername"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-envelope"></i> Email:</label>
+                        <span id="detalleEmail"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-user-tag"></i> Rol:</label>
+                        <span id="detalleRol" class="badge"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-toggle-on"></i> Estado:</label>
+                        <span id="detalleEstado" class="badge"></span>
+                    </div>
+                    <div class="detalle-item">
+                        <label><i class="fas fa-calendar-plus"></i> Fecha de Registro:</label>
+                        <span id="detalleFecha"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar cliente -->
+    <div id="modalEditarCliente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Editar Cliente</h3>
+                <span class="close" onclick="cerrarModal('modalEditarCliente')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarCliente">
+                    <input type="hidden" id="editarId">
+                    <div class="form-group">
+                        <label for="editarUsername"><i class="fas fa-user"></i> Usuario:</label>
+                        <input type="text" id="editarUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarEmail"><i class="fas fa-envelope"></i> Email:</label>
+                        <input type="email" id="editarEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarRol"><i class="fas fa-user-tag"></i> Rol:</label>
+                        <select id="editarRol" required>
+                            <option value="cliente">Cliente</option>
+                            <option value="admin">Administrador</option>
+                            <option value="empleado">Empleado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editarEstado"><i class="fas fa-toggle-on"></i> Estado:</label>
+                        <select id="editarEstado" required>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                            <option value="suspendido">Suspendido</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancelar" onclick="cerrarModal('modalEditarCliente')">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn-guardar">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div id="modalEliminarCliente" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación</h3>
+                <span class="close" onclick="cerrarModal('modalEliminarCliente')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmacion-mensaje">
+                    <div class="icono-advertencia"><i class="fas fa-user-times" style="font-size: 3rem; color: var(--danger-color);"></i></div>
+                    <p>¿Estás seguro de que deseas eliminar este cliente?</p>
+                    <p class="cliente-info">
+                        <strong><i class="fas fa-user"></i> Usuario:</strong> <span id="eliminarUsername"></span><br>
+                        <strong><i class="fas fa-envelope"></i> Email:</strong> <span id="eliminarEmail"></span>
+                    </p>
+                    <p class="advertencia">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancelar" onclick="cerrarModal('modalEliminarCliente')">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn-eliminar" id="confirmarEliminar">
+                        <i class="fas fa-trash"></i> Eliminar Cliente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/consulta-clientes.js"></script>
+</body>
+</html>

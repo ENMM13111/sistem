@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - SurtiLicores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <style>
+        .message {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid #28a745;
+            border-left: 4px solid #28a745;
+            color: #155724;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border: 1px solid #dc3545;
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+        }
+
+        .message-icon {
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .message-icon i {
+            font-size: 1.5rem;
+            color: #28a745;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-content h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #155724;
+        }
+
+        .message-content p {
+            margin: 0 0 1rem 0;
+            line-height: 1.5;
+            color: #155724;
+        }
+
+        .message-note {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+
+        .message-note small {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0f5132;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .message-note i {
+            color: #28a745;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <a href="/fontend/login.html" class="back-home" title="Volver al login">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h1 class="login-title">Recuperar Contraseña</h1>
+                <p class="login-subtitle">Ingresa tu email para recibir un enlace de recuperación</p>
+            </div>
+            
+            <form class="login-form" id="recovery-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="email">Email o Nombre de Usuario</label>
+                    <div class="input-container">
+                        <input type="text" id="email" name="email" required placeholder="tu@email.com">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>
+                    Enviar Enlace de Recuperación
+                </button>
+                
+                <div class="login-options">
+                    <a href="/fontend/login.html" class="forgot-password">
+                        <i class="fas fa-sign-in-alt" style="margin-right: 0.3rem;"></i>
+                        Volver al inicio de sesión
+                    </a>
+                </div>
+            </form>
+            
+            <!-- Mensaje de éxito -->
+        <div id="success-message" class="message success-message" style="display: none;">
+            <div class="message-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="message-content">
+                <h3>¡Enlace de recuperación enviado!</h3>
+                <p>Hemos enviado un enlace de recuperación a tu correo electrónico. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para restablecer tu contraseña.</p>
+                <div class="message-note">
+                    <small><i class="fas fa-info-circle"></i> Si no encuentras el correo, revisa tu carpeta de spam o correo no deseado.</small>
+                </div>
+            </div>
+        </div>
+            
+            <!-- Mensaje de error -->
+            <div id="error-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p id="error-text">Error al enviar el enlace. Inténtalo de nuevo.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/recuperar-contraseña.js"></script>
+</body>
+</html>

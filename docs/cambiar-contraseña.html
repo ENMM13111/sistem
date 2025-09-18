@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña - SurtiLicores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="login-page">
+        <a href="login.html" class="back-home" title="Volver al login">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h1 class="login-title">Nueva Contraseña</h1>
+                <p class="login-subtitle">Ingresa tu nueva contraseña segura</p>
+            </div>
+            
+            <form class="login-form" id="reset-password-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="password">Nueva Contraseña</label>
+                    <div class="input-container">
+                        <input type="password" id="password" name="password" required placeholder="••••••••">
+                        <i class="fas fa-lock input-icon"></i>
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-requirements">
+                        <small>
+                            <i class="fas fa-info-circle"></i>
+                            Mínimo 8 caracteres, una mayúscula, una minúscula y un número
+                        </small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Contraseña</label>
+                    <div class="input-container">
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder="••••••••">
+                        <i class="fas fa-lock input-icon"></i>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-save" style="margin-right: 0.5rem;"></i>
+                    Cambiar Contraseña
+                </button>
+                
+                <div class="login-options">
+                    <a href="login.html" class="forgot-password">
+                        <i class="fas fa-sign-in-alt" style="margin-right: 0.3rem;"></i>
+                        Volver al inicio de sesión
+                    </a>
+                </div>
+            </form>
+            
+            <!-- Mensaje de éxito -->
+            <div id="success-message" class="success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <p>¡Contraseña cambiada exitosamente! Redirigiendo al login...</p>
+            </div>
+            
+            <!-- Mensaje de error -->
+            <div id="error-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p id="error-text">Error al cambiar la contraseña. Inténtalo de nuevo.</p>
+            </div>
+            
+            <!-- Mensaje de token inválido -->
+            <div id="invalid-token-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>El enlace de recuperación es inválido o ha expirado. <a href="recuperar-contraseña.html">Solicita uno nuevo</a>.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/cambiar-contraseña.js"></script>
+</body>
+</html>

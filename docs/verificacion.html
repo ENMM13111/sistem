@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Código - Surtilicores</title>
+    <link rel="stylesheet" href="/css/verificacion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="verification-card">
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-wine-bottle"></i>
+                    <h1>Surtilicores</h1>
+                </div>
+                <h2>Verificación de Código</h2>
+                <p class="subtitle" id="verification-subtitle">Ingresa el código de verificación que enviamos a tu correo electrónico</p>
+            </div>
+
+            <form id="verificationForm" class="verification-form">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <div class="input-container">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="codigo">Código de Verificación</label>
+                    <div class="input-container">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="codigo" name="codigo" placeholder="Ingresa el código de 6 dígitos" maxlength="6" required>
+                    </div>
+                    <div class="error-message" id="codigoError"></div>
+                </div>
+
+                <button type="submit" class="btn-verify" id="btnVerify">
+                    <span class="btn-text">Verificar Código</span>
+                    <div class="loading-spinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+
+                <div class="resend-section">
+                    <p>¿No recibiste el código?</p>
+                    <button type="button" class="btn-resend" id="btnResend">
+                        <i class="fas fa-paper-plane"></i>
+                        Reenviar código
+                    </button>
+                    <div class="countdown" id="countdown" style="display: none;">
+                        Podrás reenviar en <span id="countdownTime">60</span> segundos
+                    </div>
+                </div>
+
+                <div class="back-to-login">
+                    <a href="login.html">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al inicio de sesión
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notificaciones -->
+    <div id="notification" class="notification"></div>
+
+    <script src="/js/verificacion.js"></script>
+</body>
+</html>

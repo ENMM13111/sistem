@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Ventas - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/consulta-ventas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Consulta de Ventas</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-back" onclick="window.location.href='admin.html'">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al Panel
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Estadísticas -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-ventas">0</h3>
+                        <p>Total Ventas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="ingresos-totales">$0</h3>
+                        <p>Ingresos Totales</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="venta-promedio">$0</h3>
+                        <p>Venta Promedio</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="clientes-unicos">0</h3>
+                        <p>Clientes Únicos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="fecha-inicio">Fecha Inicio:</label>
+                    <input type="date" id="fecha-inicio" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="fecha-fin">Fecha Fin:</label>
+                    <input type="date" id="fecha-fin" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="buscar-cliente">Buscar Cliente:</label>
+                    <input type="text" id="buscar-cliente" class="filter-input" placeholder="Nombre o email del cliente">
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-filter" onclick="aplicarFiltros()">
+                        <i class="fas fa-filter"></i>
+                        Filtrar
+                    </button>
+                    <button class="btn-clear" onclick="limpiarFiltros()">
+                        <i class="fas fa-times"></i>
+                        Limpiar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla de Ventas -->
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Historial de Ventas</h2>
+                <div class="table-actions">
+                    <button class="btn-export" onclick="exportarVentas()">
+                        <i class="fas fa-download"></i>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="ventas-table">
+                    <thead>
+                        <tr>
+                            <th>ID Venta</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Productos</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ventas-tbody">
+                        <!-- Las ventas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mensaje cuando no hay resultados -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No se encontraron ventas</h3>
+                <p>No hay ventas que coincidan con los filtros aplicados.</p>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Cargando ventas...</p>
+        </div>
+    </div>
+
+    <!-- Modal para ver detalles de venta -->
+    <div id="modal-detalle-venta" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalles de la Venta</h2>
+                <span class="close" onclick="cerrarModal('modal-detalle-venta')">&times;</span>
+            </div>
+            <div class="modal-body" id="detalle-venta-content">
+                <!-- El contenido se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Librería SheetJS para exportar a Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="../js/consulta-ventas.js"></script>
+</body>
+</html>

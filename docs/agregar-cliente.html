@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Cliente - SurtiLicores</title>
+    <link rel="stylesheet" href="../css/consulta-clientes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-wine-bottle"></i> SurtiLicores</h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1><i class="fas fa-user-plus"></i> Agregar Nuevo Cliente</h1>
+                <p>Registra un nuevo cliente en el sistema</p>
+            </div>
+
+            <!-- Formulario de Agregar Cliente -->
+            <div class="form-section">
+                <div class="form-container">
+                    <form id="formAgregarCliente" class="client-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nuevoUsername"><i class="fas fa-user"></i> Nombre de Usuario:</label>
+                                <input type="text" id="nuevoUsername" name="username" required>
+                                <span class="error-message" id="errorUsername"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nuevoEmail"><i class="fas fa-envelope"></i> Correo Electrónico:</label>
+                                <input type="email" id="nuevoEmail" name="email" required>
+                                <span class="error-message" id="errorEmail"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nuevaPassword"><i class="fas fa-lock"></i> Contraseña:</label>
+                                <input type="password" id="nuevaPassword" name="password" required>
+                                <div id="passwordStrength" class="password-strength">
+                                    <div class="strength-requirements">
+                                        <div class="requirement" id="req-length">
+                                            <i class="fas fa-times"></i> Al menos 8 caracteres
+                                        </div>
+                                        <div class="requirement" id="req-uppercase">
+                                            <i class="fas fa-times"></i> Una letra mayúscula
+                                        </div>
+                                        <div class="requirement" id="req-lowercase">
+                                            <i class="fas fa-times"></i> Una letra minúscula
+                                        </div>
+                                        <div class="requirement" id="req-number">
+                                            <i class="fas fa-times"></i> Un número
+                                        </div>
+                                        <div class="requirement" id="req-special">
+                                            <i class="fas fa-times"></i> Un carácter especial
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="error-message" id="errorPassword"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmarPassword"><i class="fas fa-lock"></i> Confirmar Contraseña:</label>
+                                <input type="password" id="confirmarPassword" name="confirmPassword" required>
+                                <span class="error-message" id="errorConfirmPassword"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nuevoRol"><i class="fas fa-user-tag"></i> Rol:</label>
+                                <select id="nuevoRol" name="rol" required>
+                                    <option value="">Seleccionar rol</option>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="empleado">Empleado</option>
+                                    <option value="admin">Administrador</option>
+                                </select>
+                                <span class="error-message" id="errorRol"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nuevoEstado"><i class="fas fa-toggle-on"></i> Estado:</label>
+                                <select id="nuevoEstado" name="estado" required>
+                                    <option value="">Seleccionar estado</option>
+                                    <option value="Activo" selected>Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <span class="error-message" id="errorEstado"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancelar" onclick="window.location.href='admin.html'">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                            <button type="submit" class="btn-guardar">
+                                <i class="fas fa-save"></i> Guardar Cliente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SurtiLicores</h3>
+                    <p>Sistema de gestión de clientes y administración de usuarios.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Administración</h3>
+                    <ul>
+                        <li><a href="admin.html">Panel de Control</a></li>
+                        <li><a href="consulta-productos.html">Gestión de Productos</a></li>
+                        <li><a href="#">Reportes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SurtiLicores. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/agregar-cliente.js"></script>
+</body>
+</html>
